@@ -43,6 +43,7 @@ app.get("hellow world");
 app.get("hi");
 app.post("kire");
 app.get("hi");
+app.get("hellos");
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
