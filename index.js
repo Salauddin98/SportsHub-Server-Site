@@ -39,13 +39,8 @@ run().catch(console.dir);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-app.get("hellow world");
-app.get("hi");
-app.post("kire");
-app.get("hi");
-app.get("hellos");
-app.get("hi");
-app.get;
+
+app.get("salauddin");
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
