@@ -182,27 +182,7 @@ async function run() {
       const result = await allUsers.find(query).toArray();
       res.send(result);
     });
-
-    app.get("/popularClass", async (req, res) => {
-      const query = { status: "approve" };
-      const result = await allClasses
-        .find(query)
-        .sort({ enroll: -1 })
-        .limit(6)
-        .toArray();
-      res.send(result);
-    });
-
-    app.get("/popularinstractor", async (req, res) => {
-      const query = { role: "instractor" };
-      const result = await allUsers
-        .find(query)
-        .sort({ enroll: -1 })
-        .limit(6)
-        .toArray();
-      res.send(result);
-    });
-
+    //space
     app.post("/create-payment-intent", async (req, res) => {
       const { price } = req.body;
       const amount = parseInt(+price * 100);
@@ -237,6 +217,28 @@ async function run() {
         $set: body,
       };
       const result = await allSelected.updateOne(query, updateDoc, options);
+      res.send(result);
+    });
+
+    app.post("/paymentHistory", async (req, res) => {
+      const body = req.body;
+      const result = await allPayments.insertOne(body);
+      res.send(result);
+    });
+
+    app.get("/enrolledClass/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const finds = allPayments.find(query);
+      const result = await finds.toArray();
+      res.send(result);
+    });
+
+    app.get("/paymentHistory/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const finds = await allPayments.find(query).sort({ date: -1 });
+      const result = await finds.toArray();
       res.send(result);
     });
 
