@@ -182,7 +182,27 @@ async function run() {
       const result = await allUsers.find(query).toArray();
       res.send(result);
     });
-    //space
+
+    app.get("/popularClass", async (req, res) => {
+      const query = { status: "approve" };
+      const result = await allClasses
+        .find(query)
+        .sort({ enroll: -1 })
+        .limit(6)
+        .toArray();
+      res.send(result);
+    });
+    //commit
+    app.get("/popularinstractor", async (req, res) => {
+      const query = { role: "instractor" };
+      const result = await allUsers
+        .find(query)
+        .sort({ enroll: -1 })
+        .limit(6)
+        .toArray();
+      res.send(result);
+    });
+
     app.post("/create-payment-intent", async (req, res) => {
       const { price } = req.body;
       const amount = parseInt(+price * 100);
