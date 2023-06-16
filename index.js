@@ -240,28 +240,6 @@ async function run() {
       res.send(result);
     });
 
-    app.post("/paymentHistory", async (req, res) => {
-      const body = req.body;
-      const result = await allPayments.insertOne(body);
-      res.send(result);
-    });
-
-    app.get("/enrolledClass/:email", async (req, res) => {
-      const email = req.params.email;
-      const query = { email: email };
-      const finds = allPayments.find(query);
-      const result = await finds.toArray();
-      res.send(result);
-    });
-
-    app.get("/paymentHistory/:email", async (req, res) => {
-      const email = req.params.email;
-      const query = { email: email };
-      const finds = await allPayments.find(query).sort({ date: -1 });
-      const result = await finds.toArray();
-      res.send(result);
-    });
-
     await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
