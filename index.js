@@ -49,7 +49,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    await client.connect();
+    // await client.connect();
     const allUsers = client.db("sports").collection("users");
     const allClasses = client.db("sports").collection("classes");
     const allSelected = client.db("sports").collection("selectedClass");
@@ -267,14 +267,12 @@ async function run() {
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
   } finally {
-    // Ensures that the client will close when you finish/error
-    // await client.close();
   }
 }
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello Summer Camp!");
 });
 
 app.listen(port, () => {
